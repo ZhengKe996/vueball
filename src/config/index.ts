@@ -11,7 +11,7 @@ const rockOptions = { mass: 4, isStatic: false, restitution: 0, friction: 0.5 };
 const ironOptions = { mass: 6, isStatic: false, restitution: 0, friction: 0.2 };
 const stacks: any[] = [];
 const x = window.innerWidth;
-console.log(x);
+
 // 石头1
 stacks[0] = Bodies.rectangle(x - 350, HEIGHT - 42, 30, 70, rockOptions);
 stacks[1] = Bodies.rectangle(x - 385, HEIGHT - 88, 80, 20, rockOptions);

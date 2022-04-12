@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { Engine, Render, Bodies, World, Runner, Mouse, MouseConstraint, Constraint, Events } from "matter-js";
 import { stacks } from "@/config";
+
 const Width = ref(0);
 const Height = ref(0);
 Height.value = window.innerHeight;
@@ -17,9 +18,8 @@ const render = Render.create({
     wireframes: false,
   },
 });
-console.log(Width.value);
 // 创建地板放置怪物
-const ground = Bodies.rectangle(Width.value*0.65, 600, 900, 10, { isStatic: true });
+const ground = Bodies.rectangle(Width.value * 0.65, 600, 900, 10, { isStatic: true });
 
 const mouse = Mouse.create(render.canvas);
 const mouseCoonstraint = MouseConstraint.create(engine, {
@@ -58,6 +58,15 @@ World.add(engine.world, [...stacks, ball, sling, ground, mouseCoonstraint]);
 onMounted(() => {
   Runner.run(engine);
   Render.run(render);
+});
+window.onresize = () => {
+  return (() => {
+    Width.value = window.innerWidth;
+    Height.value = window.innerHeight;
+  })();
+};
+watch([Width, Height], () => {
+  location.reload();
 });
 </script>
 
