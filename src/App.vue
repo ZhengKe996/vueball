@@ -17,9 +17,9 @@ const render = Render.create({
     wireframes: false,
   },
 });
-
+console.log(Width.value);
 // 创建地板放置怪物
-const ground = Bodies.rectangle(1100, 600, 800, 10, { isStatic: true });
+const ground = Bodies.rectangle(Width.value*0.65, 600, 900, 10, { isStatic: true });
 
 const mouse = Mouse.create(render.canvas);
 const mouseCoonstraint = MouseConstraint.create(engine, {
@@ -31,9 +31,9 @@ const mouseCoonstraint = MouseConstraint.create(engine, {
 });
 render.mouse = mouse;
 
-let ball = Bodies.circle(300, 600, 20);
+let ball = Bodies.circle(300, 500, 20);
 const sling = Constraint.create({
-  pointA: { x: 300, y: 600 },
+  pointA: { x: 300, y: 500 },
   bodyB: ball,
   stiffness: 0.05,
 });
@@ -44,8 +44,8 @@ Events.on(mouseCoonstraint, "enddrag", (e) => {
 });
 
 Events.on(engine, "afterUpdate", () => {
-  if (firing && Math.abs(ball.position.x - 300) < 20 && Math.abs(ball.position.y - 600) < 20) {
-    ball = Bodies.circle(300, 600, 20);
+  if (firing && Math.abs(ball.position.x - 300) < 20 && Math.abs(ball.position.y - 500) < 20) {
+    ball = Bodies.circle(300, 500, 20);
 
     World.add(engine.world, ball);
     sling.bodyB = ball;
